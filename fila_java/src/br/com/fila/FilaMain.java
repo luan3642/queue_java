@@ -21,14 +21,21 @@ public class FilaMain {
 	}
 	
 	public int desenfilerar() {
-		return this.fila[size--];
+		if(isEmpty()) {
+			throw new RuntimeException("A fila está vazia");
+		}
+		int elemento = this.fila[this.front];
+		this.front++;
+		this.size--;
+		return elemento;
+		
 	}
 	
 	public void exibir() {
 		System.out.print("[");
-		for(int i = 0; i<size; i++) {
+		for(int i = front; i<front + size; i++) {
 			System.out.print(fila[i]);
-			if(i != size-1) {
+			if(i != front + size-1) {
 				System.out.print(",");
 			}
 		}
