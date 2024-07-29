@@ -18,9 +18,8 @@ public class FilaTeste {
 		if(isFull()) {
 			throw new RuntimeException("a fila já está cheia");
 		}
-		this.fila[front++] = elemento;
+		this.fila[++rear] = elemento;
 		this.size++;
-		this.rear++;
 	}
 	
 	public boolean isEmpty() {
@@ -31,12 +30,16 @@ public class FilaTeste {
 		if(isEmpty()) {
 			throw new RuntimeException("A fila já está vazia");
 		}
+		this.front++;
+		this.size--;
+		
+		
 	}
 	
 	public void exibir() {
 		System.out.print("[");
 		for(int i = front; i< front + size; i++) {
-			System.out.print(i);
+			System.out.print(fila[i]);
 			if(i != front + size - 1) {
 				System.out.print(",");
 			}
@@ -45,19 +48,35 @@ public class FilaTeste {
 	}
 	
 	public boolean isFull() {
-		return this.size == this.fila.length -1;
+		return this.size == this.fila.length;
+	}
+	
+	public int peek() {
+		return this.fila[front];
 	}
 	
 	
 
 	public static void main(String[] args) {
-		FilaTeste filaTeste = new FilaTeste(4);
+		FilaTeste filaTeste = new FilaTeste(3);
 		
 		filaTeste.enfilerar(5);
 		filaTeste.enfilerar(4);
 		filaTeste.enfilerar(8);
 		
+		System.out.println("a fila está cheia? "+filaTeste.isFull());
+
+		
 		filaTeste.exibir();
+		
+		System.out.println();
+		filaTeste.desinfilerar();
+		filaTeste.exibir();
+		
+		System.out.println("primeiro da fila "+filaTeste.peek());
+		
+		
+		
 
 	}
 
