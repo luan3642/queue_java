@@ -9,10 +9,19 @@ public class FilaMain {
 	public FilaMain(int capacidade) {
 		fila = new int[capacidade];
 		this.front = 0;
+		this.rear = -1;
 	}
 	
 	public void enfilerar(int elemento) {
-		this.fila[size++] = elemento;
+		if(size == this.fila.length) {
+			throw new RuntimeException("fila está cheia");
+		}
+		this.fila[++rear] = elemento;
+		this.size++;
+	}
+	
+	public int desenfilerar() {
+		return this.fila[size--];
 	}
 	
 	public void exibir() {
@@ -47,5 +56,12 @@ public class FilaMain {
 		System.out.println();
 		System.out.println("a fila está vazia? "+filaMain.isEmpty());
 		System.out.println("o primeiro elemento da fila é: "+filaMain.peek());
+		System.out.println("quantidade de elementos na fila: "+filaMain.size);
+		System.out.println();
+		System.out.println("desinfilerando");
+		System.out.println("quem está saindo da fila? "+filaMain.desenfilerar());
+		System.out.println("o primeiro elemento da fila é: "+filaMain.peek());
+		System.out.println("quantidade de elementos na fila: "+filaMain.size);
+		filaMain.exibir();
 	}
 }
